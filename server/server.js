@@ -11,28 +11,46 @@ app.use(express.static("server/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //make array to hold answers
-mathToDo = [];
-mathResults = [];
+
+const mathResults = [];
 
 
-// app.get("/calculator", (req, res) => {
+// app.get("/mathToServer", (req, res) => {
+//     console.log();
 //   res.send(201);
 // });
+// function addNumbers(){
 
+//     if (req.body = 1){
+//       console.log('add the two numbers');
+//       console.log(number(mathToDo.numberOne) + number(mathToDo.numberTwo))
+//       console.log(mathToDo.numberOne + ' + ' + mathToDo.numberTwo);
+//       mathToDo.val('')
+//     //   mathResults.push(mathToDo.numberOne + ' + ' + mathToDo.numberTwo)
+//   }
+// }
 
 app.post("/mathToServer", (req, res) => {
-  //retrieve new data from client to server
-  let mathFromServer = req.body.name;
+  //retrieve new data from client, send to server
+  let mathFromServer = req.body;
   console.log(mathFromServer);
-  mathToDO.push(mathFromServer);
+  mathResults.push(mathFromServer);
   // 200 is ok. 201 is CREATED. 400 codes are ERRORS like 404
   res.sendStatus(201);
 });//end retrieve
 
 
-// function mathEquations(){
-
-
+// // taking number identifiers and passing them into a function
+// function grabNumbers(){
+// app.get("/mathToServer", (req, res) => {
+//   //retrieve new data from client, send to server
+  
+//   // addNumbers();
+//   // 200 is ok. 201 is CREATED. 400 codes are ERRORS like 404
+//   res.send()
+ 
+// });//end retrieve
+// }
 // }
 
 
