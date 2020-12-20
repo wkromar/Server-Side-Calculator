@@ -16,30 +16,39 @@ const mathResults = [];
 const results = [];
 
 
-// app.get("/mathToServer", (req, res) => {
-//     console.log();
-//   res.send(201);
-// });
+app.get("/mathToServer", (req, res) => {
+    console.log('sending math results to client', 201);
+  res.send(results);
+});
 
 app.post("/mathToServer", (req, res) => {
   //retrieve new data from client, send to server
   let mathFromServer = req.body;
   console.log(mathFromServer);
-
-  if (mathResults.operator === '+'){
-     mathFromServer.result = mathFromServer.numberOne + mathFromServer.numberTwo
-  }
-  else if(mathResults.operator === '-'){
-    mathFromServer.result = mathFromServer.numberOne - mathFromServer.numberTwo
-  }
-  else if(mathResults.operator === '*'){
-  mathFromServer.result = mathFromServer.numberOne * mathFromServer.numberTwo
-  }
-  else if(mathResults.operator === '/'){
-    mathFromServer.result = mathFromServer.numberOne / mathFromServer.numberTwo
-  }
-
-  results.push(mathFromServer.result)
+  let operator = mathFromServer.operator;
+  let numOne = Number(mathFromServer.numberOne);
+  let numTwo = Number(mathFromServer.numberTwo);
+  let results = 0
+    switch(operator){
+        case '+':
+         results =  numOne + numTwo
+        break;
+        case "-":
+          results = numOne - numTwo
+        break;
+        case "*":
+          results = numOne * numTwo
+          break;
+        case "/":
+          results = numOne / numTwo
+          break;
+    }
+    let finishedEquation = {
+      results: results,
+      equation:`${numOne} ${operator} ${numTwo} = ${results}`
+    }
+  results.push(finishedEquation)
+  console.log(results);
 });//end retrieve
 
 
