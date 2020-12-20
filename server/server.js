@@ -12,13 +12,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //make array to hold answers
 
-const mathResults = [];
-const results = [];
+
+const equationLog = [];
 
 
 app.get("/mathToServer", (req, res) => {
-    console.log('sending math results to client', 201);
-  res.send(results);
+  res.send(equationLog);
+  console.log(equationLog);
 });
 
 app.post("/mathToServer", (req, res) => {
@@ -28,27 +28,28 @@ app.post("/mathToServer", (req, res) => {
   let operator = mathFromServer.operator;
   let numOne = Number(mathFromServer.numberOne);
   let numTwo = Number(mathFromServer.numberTwo);
-  let results = 0
-    switch(operator){
+  let results = 0;
+    switch (operator){
         case '+':
-         results =  numOne + numTwo
+         results =  numOne + numTwo;
         break;
         case "-":
-          results = numOne - numTwo
+          results = numOne - numTwo;
         break;
         case "*":
-          results = numOne * numTwo
+          results = numOne * numTwo;
           break;
         case "/":
-          results = numOne / numTwo
+          results = numOne / numTwo;
           break;
     }
     let finishedEquation = {
       results: results,
       equation:`${numOne} ${operator} ${numTwo} = ${results}`
     }
-  results.push(finishedEquation)
-  console.log(results);
+  equationLog.push(finishedEquation)
+  // console.log(results);
+  console.log(finishedEquation);
 });//end retrieve
 
 

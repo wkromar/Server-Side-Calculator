@@ -6,12 +6,14 @@ let dataToSend = {};
 //make a handle ready function to handle clicks
 function handleReady() {
 //   console.log("4?");
-addToDom();
+
   $(document).on("click","#equals", userInputs);
   $(document).on("click","#targetAdd", addChosen);
   $(document).on("click","#subtract", subtractChosen);
   $(document).on("click","#multiply", multiplyChosen);
   $(document).on("click","#divide", divideChosen);
+  $(document).on("click","#clearInputs", clearInputs);
+  addToDom();
 }
 //end handle ready
 //package up data from user
@@ -29,8 +31,9 @@ $.ajax({
     data: dataToSend,
 }).then(function(response){
     console.log(response);
-    console.log('data to server', 201);
+    
 })
+addToDom()
 return dataToSend
 } //data packaged into an object and sent to server. user input end
 
@@ -42,25 +45,25 @@ return dataToSend
         console.log('clicked +');
             // dataToSend.operator.empty().
             dataToSend.operator = "+"
-        addToDom()
+        
     }
     function subtractChosen(){
         console.log('clicked -');
             // dataToSend.operator.empty().
             dataToSend.operator = "-"
-        addToDom()
+        
     }
     function multiplyChosen(){
         console.log('clicked *');
             // dataToSend.operator.empty().
             dataToSend.operator = "*"
-         addToDom()
+         
     }
     function divideChosen(){
         console.log('clicked /');
             // dataToSend.operator.empty().
             dataToSend.operator = "/"
-         addToDom()
+         
     }
 
 //returning data to client to post on dom
@@ -68,16 +71,25 @@ function addToDom(){
 $.ajax({
     type: 'GET',
     url: '/mathToServer'
-}).then(function(response){
+}).then(function (response){
     console.log(response);
-    console.log(dataToSend);
-    for (let i = 0; i < dataToSend.length; i++) {
-        let results = response;
+    for (let i = 0; i < response.length; i++) {
         $('#resultField').append(`
         <ul>
-            <li>${dataToSend.numberOne} ${dataToSend.operator} ${dataToSend.numberTwo} = ${results}</li>
+            <li>${response[i].equation}</li>
         </ul>`)
         
     }
+    for (let i = 0; i < response.length; i++){
+    $('#solution').empty();
+    $('#solution').append(`${response[i].results}`)
+    }
 })
+}
+
+//create function to clear inputs from input fields
+
+function clearInputs(){
+    $("#firstNumberIn").val(''),
+    $("#secondNumberIn").val('')
 }
