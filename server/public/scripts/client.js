@@ -7,7 +7,7 @@ let dataToSend = {};
 function handleReady() {
 //   console.log("4?");
   $(document).on("click","#equals", userInputs);
-  $(document).on("click","#add", addChosen);
+  $(document).on("click","#targetAdd", addChosen);
   $(document).on("click","#subtract", subtractChosen);
   $(document).on("click","#multiply", multiplyChosen);
   $(document).on("click","#divide", divideChosen);
@@ -39,23 +39,23 @@ return dataToSend
 // function mathInput(){
     function addChosen(){
         console.log('clicked +');
-            dataToSend.operator.empty().
-            dataToSend.operator = ("+")
+            // dataToSend.operator.empty().
+            dataToSend.operator = "+"
 
     }
     function subtractChosen(){
         console.log('clicked -');
-            dataToSend.operator.empty().
-            dataToSend.operator = ("-")
+            // dataToSend.operator.empty().
+            dataToSend.operator = "-"
     }
     function multiplyChosen(){
         console.log('clicked *');
-            dataToSend.operator.empty().
-            dataToSend.operator = ("*")
+            // dataToSend.operator.empty().
+            dataToSend.operator = "*"
     }
     function divideChosen(){
-        console.log('clicked -');
-            dataToSend.operator.empty().
-            dataToSend.operator = ("/")
+        console.log('clicked /');
+            // dataToSend.operator.empty().
+            dataToSend.operator = "/"
     }
 

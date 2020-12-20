@@ -13,47 +13,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //make array to hold answers
 
 const mathResults = [];
+const results = [];
 
 
 // app.get("/mathToServer", (req, res) => {
 //     console.log();
 //   res.send(201);
 // });
-// function addNumbers(){
-
-//     if (req.body = 1){
-//       console.log('add the two numbers');
-//       console.log(number(mathToDo.numberOne) + number(mathToDo.numberTwo))
-//       console.log(mathToDo.numberOne + ' + ' + mathToDo.numberTwo);
-//       mathToDo.val('')
-//     //   mathResults.push(mathToDo.numberOne + ' + ' + mathToDo.numberTwo)
-//   }
-// }
 
 app.post("/mathToServer", (req, res) => {
   //retrieve new data from client, send to server
   let mathFromServer = req.body;
   console.log(mathFromServer);
-  mathResults.push(mathFromServer);
-  // 200 is ok. 201 is CREATED. 400 codes are ERRORS like 404
-  res.sendStatus(201);
+
+  if (mathResults.operator === '+'){
+     mathFromServer.result = mathFromServer.numberOne + mathFromServer.numberTwo
+  }
+  else if(mathResults.operator === '-'){
+    mathFromServer.result = mathFromServer.numberOne - mathFromServer.numberTwo
+  }
+  else if(mathResults.operator === '*'){
+  mathFromServer.result = mathFromServer.numberOne * mathFromServer.numberTwo
+  }
+  else if(mathResults.operator === '/'){
+    mathFromServer.result = mathFromServer.numberOne / mathFromServer.numberTwo
+  }
+
+  results.push(mathFromServer.result)
 });//end retrieve
-
-
-// // taking number identifiers and passing them into a function
-// function grabNumbers(){
-// app.get("/mathToServer", (req, res) => {
-//   //retrieve new data from client, send to server
-  
-//   // addNumbers();
-//   // 200 is ok. 201 is CREATED. 400 codes are ERRORS like 404
-//   res.send()
- 
-// });//end retrieve
-// }
-// }
-
-
 
 
 //START UP SERVER! leave at bottom
